@@ -1,3 +1,37 @@
+// Get user profile
+const getProfile = async (req, res) => {
+    try {
+        const userId = req.user.userId;
+        const user = await User.findById(userId).select('-password');
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json({ user });
+    } catch (err) {
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+};
+
+// Edit user profile
+const editProfile = async (req, res) => {
+    try {
+        const userId = req.user.userId;
+        const { name, email, phone, address, profilePicture } = req.body;
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        if (name) user.name = name;
+        if (email) user.email = email;
+        if (phone) user.phone = phone;
+        if (address) user.address = address;
+        if (profilePicture) user.profilePicture = profilePicture;
+        await user.save();
+        res.json({ message: 'Profile updated successfully', user });
+    } catch (err) {
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+};
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -227,5 +261,7 @@ module.exports = {
     bookPhotographer,
     getMyBookings,
     leaveReview,
-    uploadProfilePicture
+    uploadProfilePicture,
+    getProfile,
+    editProfile
 };

@@ -118,10 +118,32 @@ const deletePhotographer = async (req, res) => {
     }
 };
 
+// Get pending photographers (not approved)
+const getPendingPhotographers = async (req, res) => {
+    try {
+        const photographers = await Photographer.find({ isApproved: false }).populate('user');
+        res.json({ photographers });
+    } catch (err) {
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+};
+
+// Get approved photographers
+const getApprovedPhotographers = async (req, res) => {
+    try {
+        const photographers = await Photographer.find({ isApproved: true }).populate('user');
+        res.json({ photographers });
+    } catch (err) {
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+};
+
 module.exports = {
     login,
     approvePhotographer,
     rejectPhotographer,
     addPhotographer,
-    deletePhotographer
+    deletePhotographer,
+    getPendingPhotographers,
+    getApprovedPhotographers
 };

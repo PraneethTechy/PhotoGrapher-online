@@ -12,7 +12,12 @@ const adminRoutes = require('./routes/adminRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+    allowedHeaders: ['Authorization', 'Content-Type'],
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+}));
 app.use(bodyParser.json());
 
 dotEnv.config();

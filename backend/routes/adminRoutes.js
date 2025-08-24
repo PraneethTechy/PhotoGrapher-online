@@ -20,4 +20,10 @@ router.post('/photographers', authMiddleware, roleMiddleware(['admin']), adminCo
 // Delete photographer
 router.delete('/photographers/:photographerId', authMiddleware, roleMiddleware(['admin']), adminController.deletePhotographer);
 
+// Get pending photographers
+router.get('/pending-photographers', authMiddleware, roleMiddleware(['admin']), adminController.getPendingPhotographers);
+
+// Get approved photographers
+router.get('/approved-photographers', authMiddleware, roleMiddleware(['admin']), adminController.getApprovedPhotographers);
+
 module.exports = router;

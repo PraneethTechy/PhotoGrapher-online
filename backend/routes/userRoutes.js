@@ -18,6 +18,12 @@ router.post('/book', authMiddleware, userController.bookPhotographer);
 // Get all bookings for the logged-in user
 router.get('/my-bookings', authMiddleware, userController.getMyBookings);
 
+// Get user profile
+router.get('/profile', authMiddleware, userController.getProfile);
+
+// Edit user profile
+router.put('/profile', authMiddleware, userController.editProfile);
+
 
 // Upload or update profile picture
 const upload = require('../config/multer');

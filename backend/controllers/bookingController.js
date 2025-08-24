@@ -101,9 +101,58 @@ const updateBookingStatus = async (req, res) => {
     }
 };
 
+// User reviews a completed booking
+const Review = require('../models/Review');
+const reviewBooking = async (req, res) => {
+    try {
+        const { bookingId } = req.params;
+        const { rating, review } = req.body;
+        const booking = await Booking.findById(bookingId);
+        if (!booking || String(booking.user) !== String(req.user.userId)) {
+            return res.status(404).json({ message: 'Booking not found.' });
+        }
+        if (booking.status !== 'completed') {
+            return res.status(400).json({ message: 'Booking not completed yet.' });
+        }
+        if (booking.reviewed) {
+            return res.status(400).json({ message: 'Already reviewed.' });
+        }
+        const reviewDoc = new Review({
+            user: req.user.userId,
+            photographer: booking.photographer,
+            booking: booking._id,
+            rating,
+            review
+        });
+        await reviewDoc.save();
+        booking.reviewed = true;
+        await booking.save();
+        res.json({ message: 'Review submitted', review: reviewDoc });
+    } catch (err) {
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+};
+
+// Get notifications for a booking (user)
+const getBookingNotifications = async (req, res) => {
+    try {
+        const { bookingId } = req.params;
+        const booking = await Booking.findById(bookingId);
+        if (!booking || String(booking.user) !== String(req.user.userId)) {
+            return res.status(404).json({ message: 'Booking not found.' });
+        }
+        // Example notification: status change
+        res.json({ notifications: [`Booking status: ${booking.status}`] });
+    } catch (err) {
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+};
+
 module.exports = {
     createBooking,
     getBookingsByUser,
     getBookingsByPhotographer,
-    updateBookingStatus
+    updateBookingStatus,
+    reviewBooking,
+    getBookingNotifications
 };

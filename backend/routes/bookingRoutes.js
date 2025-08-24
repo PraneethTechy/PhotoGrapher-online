@@ -13,9 +13,13 @@ router.get('/user', authMiddleware, bookingController.getBookingsByUser);
 // Get all bookings for the logged-in photographer
 router.get('/photographer', authMiddleware, bookingController.getBookingsByPhotographer);
 
+// Update booking status (approve/reject/complete) by photographer
 router.put('/:bookingId/status', authMiddleware, bookingController.updateBookingStatus);
 
-// Update booking status (approve/reject/complete) by photographer
-router.put('/:bookingId/status', authMiddleware, photographerController.updateBookingStatus);
+// User reviews a completed booking
+router.post('/user/:bookingId/review', authMiddleware, bookingController.reviewBooking);
+
+// Get notifications for a booking (user)
+router.get('/user/:bookingId/notifications', authMiddleware, bookingController.getBookingNotifications);
 
 module.exports = router;
