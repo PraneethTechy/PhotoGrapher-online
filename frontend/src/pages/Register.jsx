@@ -20,7 +20,7 @@ const Register = () => {
     setError('');
     setSuccess('');
     try {
-      const res = await axios.post('http://localhost:5000/user/register', form);
+      const res = await axios.post('https://photographer-online-backend.onrender.com/user/register', form);
       if (res.data && res.data.success) {
         setSuccess('Registration successful! Redirecting to Sign In...');
         setForm({ name: '', email: '', password: '' });

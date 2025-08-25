@@ -15,7 +15,7 @@ const PhotographerPortfolio = () => {
 
   const fetchPortfolio = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/photographer/profile', {
+      const res = await axios.get('https://photographer-online-backend.onrender.com/photographer/profile', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setPortfolio(res.data.photographer.portfolio || []);
@@ -34,7 +34,7 @@ const PhotographerPortfolio = () => {
     const formData = new FormData();
     formData.append('file', file);
     try {
-      await axios.post('http://localhost:5000/photographer/portfolio/upload', formData, {
+      await axios.post('https://photographer-online-backend.onrender.com/photographer/portfolio/upload', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
@@ -50,7 +50,7 @@ const PhotographerPortfolio = () => {
 
   const handleDeletePortfolio = async (url) => {
     try {
-      await axios.delete('http://localhost:5000/photographer/portfolio/delete', {
+      await axios.delete('https://photographer-online-backend.onrender.com/photographer/portfolio/delete', {
         headers: { Authorization: `Bearer ${token}` },
         data: { url }
       });
