@@ -83,9 +83,9 @@ const Navbar = () => {
   return (
     <div className="w-full h-16 bg-gray-900 text-white flex items-center px-6 shadow-md sticky top-3 z-50 my-3 rounded-lg">
       {/* Left: Project Title */}
-      <h1 className="text-2xl font-extrabold tracking-wide">
+      <Link to="/" className="text-2xl font-extrabold tracking-wide hover:text-gray-300 transition">
         BookPhoto<span className="text-red-500">Grapher</span>
-      </h1>
+      </Link>
 
       {/* Right: Nav Items or User Profile */}
       <div className="ml-auto flex items-center gap-6 text-lg font-medium relative">
