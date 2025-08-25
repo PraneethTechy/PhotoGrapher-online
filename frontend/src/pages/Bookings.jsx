@@ -15,7 +15,7 @@ const Bookings = () => {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/user/bookings', {
+      const res = await axios.get(`${API_BASE_URL}/user/bookings`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBookings(res.data.bookings || []);
@@ -26,7 +26,7 @@ const Bookings = () => {
 
   const handleReview = async (bookingId, rating, reviewText) => {
     try {
-      await axios.post(`http://localhost:5000/user/bookings/${bookingId}/review`, { rating, review: reviewText }, {
+      await axios.post(`${API_BASE_URL}/user/bookings/${bookingId}/review`, { rating, review: reviewText }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSuccess('Review submitted');

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
+import API_BASE_URL from '../config/api';
 
 const Navbar = () => {
   const [photographerProfileId, setPhotographerProfileId] = useState('');
@@ -25,7 +26,7 @@ const Navbar = () => {
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
         if (token && userId) {
-          fetch(`http://localhost:5000/photographer/profile-by-user/${userId}`, {
+          fetch(`${API_BASE_URL}/photographer/profile-by-user/${userId}`, {
             headers: { Authorization: `Bearer ${token}` }
           })
             .then(res => res.json())
@@ -96,7 +97,7 @@ const Navbar = () => {
   {userName && renderProfilePicture()}
   {userName ? (
     <>
-      
+
       <div className="flex items-center gap-2" ref={dropdownRef}>
         <button
           className="flex items-center gap-2 bg-gray-700 px-2 py-1 rounded-full font-semibold text-white hover:bg-red-500 transition focus:outline-none"

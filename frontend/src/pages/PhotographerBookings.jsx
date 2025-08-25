@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PhotographerSidebar from '../components/PhotographerSidebar';
+import API_BASE_URL from '../config/api';
 
 const PhotographerBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -13,7 +14,7 @@ const PhotographerBookings = () => {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/photographer/bookings', {
+      const res = await axios.get(`${API_BASE_URL}/photographer/bookings`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBookings(res.data.bookings || []);

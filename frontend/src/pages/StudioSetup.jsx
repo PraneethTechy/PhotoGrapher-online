@@ -43,7 +43,7 @@ const StudioSetup = () => {
       zip: form.zip
     };
     try {
-      const res = await axios.post('http://localhost:5000/photographer/register', payload);
+      const res = await axios.post(`${API_BASE_URL}/photographer/register`, payload);
       if (res.data && res.data.user) {
         setSuccess('Registration successful!');
         setDialogOpen(true);

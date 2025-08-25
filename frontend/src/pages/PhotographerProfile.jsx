@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 
 const PhotographerProfile = () => {
   const { id } = useParams();
@@ -17,7 +18,7 @@ const PhotographerProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/photographer/profile/${id}`);
+        const res = await axios.get(`${API_BASE_URL}/photographer/profile/${id}`);
         setPhotographer(res.data.photographer);
       } catch (err) {
         setError('Failed to load photographer profile');
@@ -39,7 +40,7 @@ const PhotographerProfile = () => {
     const formData = new FormData();
     formData.append('profilePicture', profilePicFile);
     try {
-      const res = await axios.post('http://localhost:5000/photographer/profile-picture', formData, {
+      const res = await axios.post(`${API_BASE_URL}/photographer/profile-picture`, formData, {
         headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` }
       });
       setPhotographer(prev => ({ ...prev, user: { ...prev.user, profilePicture: res.data.profilePicture } }));
@@ -73,7 +74,7 @@ const PhotographerProfile = () => {
     setBookingMsg('');
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/booking', {
+      await axios.post(`${API_BASE_URL}/booking`, {
         photographerId: photographer._id,
         date: bookingDate
       }, {

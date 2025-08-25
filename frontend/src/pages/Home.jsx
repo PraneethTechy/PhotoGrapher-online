@@ -20,7 +20,7 @@ const Home = () => {
             setLoading(true);
             setError('');
             try {
-                const res = await axios.get('http://localhost:5000/photographer/search');
+                const res = await axios.get(`${API_BASE_URL}/photographer/search`);
                 setPhotographers(res.data.photographers || []);
             } catch (err) {
                 setError('Failed to fetch photographers');
@@ -38,7 +38,7 @@ const Home = () => {
             if (category) params.category = category.trim().toLowerCase();
             if (city) params.city = city.trim().toLowerCase();
             if (date) params.date = date;
-            const res = await axios.get('http://localhost:5000/photographer/search', { params });
+            const res = await axios.get(`${API_BASE_URL}/photographer/search`, { params });
             const results = res.data.photographers || [];
             setFilteredPhotographers(results);
             if (results.length === 0) {
