@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../config/api';
 
 const EditProfile = () => {
   const [form, setForm] = useState({ name: '', email: '', phone: '', address: '', profilePicture: '' });
@@ -12,7 +13,7 @@ const EditProfile = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    axios.get('http://localhost:5000/user/profile', {
+    axios.get(`${API_BASE_URL}/user/profile`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => {
@@ -50,7 +51,7 @@ const EditProfile = () => {
     const formData = new FormData();
     formData.append('profilePicture', profilePicFile);
     try {
-      const res = await axios.post('https://photographer-online-backend.onrender.com/user/profile-picture', formData, {
+      const res = await axios.post(`${API_BASE_URL}/user/profile-picture`, formData, {
         headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` }
       });
       setForm(prev => ({ ...prev, profilePicture: res.data.profilePicture }));
@@ -70,7 +71,7 @@ const EditProfile = () => {
     setSuccess('');
     const token = localStorage.getItem('token');
     try {
-      const res = await axios.put('http://localhost:5000/user/profile', form, {
+      const res = await axios.put(`${API_BASE_URL}/user/profile`, form, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSuccess('Profile updated successfully!');

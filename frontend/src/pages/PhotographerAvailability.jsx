@@ -3,6 +3,7 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import PhotographerSidebar from '../components/PhotographerSidebar';
+import API_BASE_URL from '../config/api';
 
 const PhotographerAvailability = () => {
   const [unavailableDates, setUnavailableDates] = useState([]);
@@ -17,7 +18,7 @@ const PhotographerAvailability = () => {
 
   const fetchUnavailableDates = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/photographer/profile', {
+      const res = await axios.get(`${API_BASE_URL}/photographer/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUnavailableDates(res.data.photographer.unavailableDates ? res.data.photographer.unavailableDates.map(d => new Date(d)) : []);
@@ -28,7 +29,7 @@ const PhotographerAvailability = () => {
 
   const handleUnavailableDatesSave = async () => {
     try {
-      await axios.put('http://localhost:5000/photographer/unavailable-dates', {
+      await axios.put(`${API_BASE_URL}/photographer/unavailable-dates`, {
         dates: selectedDates.map(d => d.toISOString())
       }, {
         headers: { Authorization: `Bearer ${token}` }
