@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import API_BASE_URL from '../config/api';
 
 const Home = () => {
-   
+
     const [category, setCategory] = useState('');
     const [city, setCity] = useState('');
     const [date, setDate] = useState('');
