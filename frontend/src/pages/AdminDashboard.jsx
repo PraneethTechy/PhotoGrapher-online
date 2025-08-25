@@ -14,12 +14,12 @@ const AdminDashboard = () => {
   // Fetch photographers
   const fetchPhotographers = () => {
     const token = localStorage.getItem('token');
-    axios.get('http://localhost:5000/admin/pending-photographers', {
+    axios.get('https://photographer-online-backend.onrender.com/admin/pending-photographers', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => setPendingPhotographers(res.data.photographers || []))
       .catch(() => setError('Failed to load pending photographers'));
-    axios.get('http://localhost:5000/admin/approved-photographers', {
+    axios.get('https://photographer-online-backend.onrender.com/admin/approved-photographers', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => setApprovedPhotographers(res.data.photographers || []))
@@ -34,7 +34,7 @@ const AdminDashboard = () => {
   const handleApprove = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.put(`http://localhost:5000/admin/photographers/${id}/approve`, {}, {
+      await axios.put(`https://photographer-online-backend.onrender.com/admin/photographers/${id}/approve`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchPhotographers();
@@ -47,7 +47,7 @@ const AdminDashboard = () => {
   const handleReject = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:5000/admin/photographers/${id}/reject`, {
+      await axios.delete(`https://photographer-online-backend.onrender.com/admin/photographers/${id}/reject`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchPhotographers();
@@ -60,7 +60,7 @@ const AdminDashboard = () => {
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:5000/admin/photographers/${id}`, {
+      await axios.delete(`https://photographer-online-backend.onrender.com/admin/photographers/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchPhotographers();
@@ -74,7 +74,7 @@ const AdminDashboard = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      await axios.post('http://localhost:5000/admin/photographers', addForm, {
+      await axios.post('https://photographer-online-backend.onrender.com/admin/photographers', addForm, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setShowAddForm(false);

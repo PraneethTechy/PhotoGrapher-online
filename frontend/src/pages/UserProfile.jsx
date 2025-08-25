@@ -10,7 +10,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    axios.get('http://localhost:5000/user/profile', {
+    axios.get('https://photographer-online-backend.onrender.com/user/profile', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => {
@@ -20,7 +20,7 @@ const UserProfile = () => {
         setError('Failed to load profile');
       });
     // Fetch bookings for user
-    axios.get('http://localhost:5000/booking/mybookings', {
+    axios.get('https://photographer-online-backend.onrender.com/booking/mybookings', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => {
@@ -42,7 +42,7 @@ const UserProfile = () => {
     formData.append('profilePicture', profilePicFile);
     try {
       // Replace with your actual endpoint for uploading profile picture
-      const res = await axios.post(`http://localhost:5000/user/uploadProfilePicture/${user._id}`, formData, {
+      const res = await axios.post(`https://photographer-online-backend.onrender.com/user/uploadProfilePicture/${user._id}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` }
       });
       setUser(prev => ({ ...prev, profilePicture: res.data.url }));

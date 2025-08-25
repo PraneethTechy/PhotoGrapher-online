@@ -50,7 +50,7 @@ const EditProfile = () => {
     const formData = new FormData();
     formData.append('profilePicture', profilePicFile);
     try {
-      const res = await axios.post('http://localhost:5000/user/profile-picture', formData, {
+      const res = await axios.post('https://photographer-online-backend.onrender.com/user/profile-picture', formData, {
         headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` }
       });
       setForm(prev => ({ ...prev, profilePicture: res.data.profilePicture }));
