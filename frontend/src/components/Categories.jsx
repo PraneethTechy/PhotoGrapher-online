@@ -1,6 +1,4 @@
-
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import wedding from "../assets/wedding,png.png";
 import fashion from "../assets/fashion3.png";
 import Travel from "../assets/Travel.png";
@@ -18,22 +16,6 @@ const categories = [
 ];
 
 const Categories = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // Check if user is logged in
-    const token = localStorage.getItem('token');
-    if (token) {
-      // If user is logged in, redirect to home page
-      navigate('/home');
-    }
-  }, [navigate]);
-
-  const handleCategoryClick = (categoryName) => {
-    // When a category is clicked, navigate to home page with category filter
-    navigate(`/home?category=${categoryName.toLowerCase()}`);
-  };
-
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-6">
@@ -46,7 +28,6 @@ const Categories = () => {
             <div
               key={index}
               className="relative group rounded-xl overflow-hidden shadow-md cursor-pointer"
-              onClick={() => handleCategoryClick(cat.name)}
             >
               <img
                 src={cat.image}
@@ -58,16 +39,6 @@ const Categories = () => {
               </div>
             </div>
           ))}
-        </div>
-        
-        <div className="text-center mt-8">
-          <p className="text-gray-600 mb-4">Ready to find photographers?</p>
-          <button 
-            onClick={() => navigate('/signin')}
-            className="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition duration-300"
-          >
-            Sign In to Continue
-          </button>
         </div>
       </div>
     </section>

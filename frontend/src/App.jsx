@@ -46,10 +46,8 @@ const App = () => {
       </div>
 
   <Routes>
-        {/* Categories page as landing */}
-        <Route path="/" element={<Categories />} />
-        {/* Home page for logged in users */}
-        <Route path="/home" element={<Home />} />
+        {/* Home page */}
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/studiosetup" element={<StudioSetup />} />
         <Route path="/signin" element={<Signin />} />

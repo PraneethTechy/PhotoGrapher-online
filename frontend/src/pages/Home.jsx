@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Footer from '../components/Footer';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import API_BASE_URL from '../config/api';
 
 const Home = () => {
-    const [searchParams] = useSearchParams();
 
-    const [category, setCategory] = useState(searchParams.get('category') || '');
+    const [category, setCategory] = useState('');
     const [city, setCity] = useState('');
     const [date, setDate] = useState('');
     const [photographers, setPhotographers] = useState([]);
