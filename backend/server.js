@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({
     origin: [
         'http://localhost:5173',         // keep for local development
-        'https://photo-grapher-online-beige.vercel.app/' // add your deployed frontend
+        'https://photo-grapher-online-beige.vercel.app' // add your deployed frontend
     ],
     credentials: true,
     allowedHeaders: ['Authorization', 'Content-Type'],
