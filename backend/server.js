@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors({
     origin: [
-        // keep for local development
+        'http://localhost:5173',         // keep for local development
         'https://your-frontend.vercel.app' // add your deployed frontend
     ],
     credentials: true,
