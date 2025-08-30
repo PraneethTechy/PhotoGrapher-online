@@ -1,12 +1,12 @@
 
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import wedding from "../assets/wedding,png.png";
-import fashion from "../assets/fashion3.png";
+import wedding from "../assets/wedding.png";
+import fashion from "../assets/fashion.png";
 import Travel from "../assets/Travel.png";
 import Birthday from "../assets/Birthday.png";
 import Product from "../assets/product.png";
-import event from "../assets/event1.png.png";
+import event from "../assets/event.png";
 
 const categories = [
   { name: "Wedding", image: wedding },

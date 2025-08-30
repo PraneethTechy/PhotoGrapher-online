@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PhotographerSidebar from '../components/PhotographerSidebar';
+import API_BASE_URL from '../config/api';
 
 const PhotographerPortfolio = () => {
   const [portfolio, setPortfolio] = useState([]);
@@ -15,7 +16,7 @@ const PhotographerPortfolio = () => {
 
   const fetchPortfolio = async () => {
     try {
-      const res = await axios.get('https://photographer-online-backend.onrender.com/photographer/profile', {
+      const res = await axios.get(`${API_BASE_URL}/photographer/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setPortfolio(res.data.photographer.portfolio || []);
@@ -34,7 +35,7 @@ const PhotographerPortfolio = () => {
     const formData = new FormData();
     formData.append('file', file);
     try {
-      await axios.post('https://photographer-online-backend.onrender.com/photographer/portfolio/upload', formData, {
+      await axios.post(`${API_BASE_URL}/photographer/portfolio/upload`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
@@ -50,7 +51,7 @@ const PhotographerPortfolio = () => {
 
   const handleDeletePortfolio = async (url) => {
     try {
-      await axios.delete('https://photographer-online-backend.onrender.com/photographer/portfolio/delete', {
+      await axios.delete(`${API_BASE_URL}/photographer/portfolio/delete`, {
         headers: { Authorization: `Bearer ${token}` },
         data: { url }
       });

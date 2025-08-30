@@ -3,6 +3,7 @@ import axios from 'axios';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import API_BASE_URL from '../config/api';
+import defaultProfile from '../assets/defaultProfile.png';
 
 const Home = () => {
 
@@ -53,7 +54,7 @@ const Home = () => {
     };
 
     return (
-    <>
+        <>
             <div className="bg-gray-800 flex flex-col items-center">
                 {/* Hero / Search Section */}
                 <div className="h-[480px] w-full flex justify-center items-center px-6 md:px-0">
@@ -114,16 +115,16 @@ const Home = () => {
                     <div className="w-full grid md:grid-cols-3 gap-8 mt-6">
                         {(filteredPhotographers ? filteredPhotographers : photographers).map((p, idx) => (
                             <div key={idx} className="bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center hover:scale-105 transition">
-                                                                <img src={p.profilePicture || '/default-profile.png'} alt={p.user?.name} className="w-32 h-32 object-cover rounded-full mb-4" />
-                                                                <h3 className="text-xl font-bold mb-1 text-gray-800">{p.user?.name}</h3>
-                                                                <div className="text-gray-600 font-semibold mb-1">
-                                                                    <span className="block">City: {p.city || 'N/A'}</span>
-                                                                    <span className="block">State: {p.state || 'N/A'}</span>
-                                                                    <span className="block">Address: {p.user?.address || 'N/A'}</span>
-                                                                </div>
-                                                                <p className="text-gray-600">Categories: {Array.isArray(p.categories) ? p.categories.join(', ') : p.categories}</p>
-                                                                <p className="text-yellow-600 font-bold">Rating: {p.averageRating ? p.averageRating.toFixed(2) : 'N/A'}</p>
-                                                                <Link to={`/profile/${p._id}`} className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">View Profile</Link>
+                                <img src={p.profilePicture || defaultProfile} alt={p.user?.name} className="w-32 h-32 object-cover rounded-full mb-4" />
+                                <h3 className="text-xl font-bold mb-1 text-gray-800">{p.user?.name}</h3>
+                                <div className="text-gray-600 font-semibold mb-1">
+                                    <span className="block">City: {p.city || 'N/A'}</span>
+                                    <span className="block">State: {p.state || 'N/A'}</span>
+                                    <span className="block">Address: {p.user?.address || 'N/A'}</span>
+                                </div>
+                                <p className="text-gray-600">Categories: {Array.isArray(p.categories) ? p.categories.join(', ') : p.categories}</p>
+                                <p className="text-yellow-600 font-bold">Rating: {p.averageRating ? p.averageRating.toFixed(2) : 'N/A'}</p>
+                                <Link to={`/profile/${p._id}`} className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">View Profile</Link>
                             </div>
                         ))}
                     </div>
@@ -165,7 +166,7 @@ const Home = () => {
                 </div>
             </div>
 
-           <Footer />
+            <Footer />
         </>
     );
 };

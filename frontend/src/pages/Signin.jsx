@@ -20,9 +20,9 @@ const Signin = () => {
     setSuccess('');
     try {
       let url;
-      if (role === 'user') url = 'https://photographer-online-backend.onrender.com/user/login';
-      else if (role === 'photographer') url = 'https://photographer-online-backend.onrender.com/photographer/login';
-      else if (role === 'admin') url = 'https://photographer-online-backend.onrender.com/admin/login';
+      if (role === 'user') url = `${API_BASE_URL}/user/login`;
+      else if (role === 'photographer') url = `${API_BASE_URL}/photographer/login`;
+      else if (role === 'admin') url = `${API_BASE_URL}/admin/login`;
       const res = await axios.post(url, form);
       if (res.data && res.data.token) {
         setSuccess('Login successful!');

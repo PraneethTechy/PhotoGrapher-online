@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import API_BASE_URL from '../config/api';
+import defaultProfile from '../assets/defaultProfile.png';
 
 const EditProfile = () => {
   const [form, setForm] = useState({ name: '', email: '', phone: '', address: '', profilePicture: '' });
@@ -89,7 +90,7 @@ const EditProfile = () => {
       <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Edit Profile</h2>
       <div className="flex flex-col md:flex-row items-center md:items-start gap-10 w-full">
         <div className="flex flex-col items-center w-full md:w-1/3">
-          <img src={form.profilePicture || '/default-profile.png'} alt={form.name} className="w-40 h-40 object-cover rounded-full border-4 border-yellow-400 mb-4 shadow-lg" />
+          <img src={form.profilePicture || defaultProfile} alt={form.name} className="w-40 h-40 object-cover rounded-full border-4 border-yellow-400 mb-4 shadow-lg" />
           <div className="w-full">
             <label className="block text-sm font-medium text-gray-700 mb-1">Profile Picture</label>
             <input type="file" accept="image/*" onChange={handleProfilePicChange} className="w-full mb-2" />

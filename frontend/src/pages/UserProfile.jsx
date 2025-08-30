@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../config/api';
+import defaultProfile from '../assets/defaultProfile.png';
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
@@ -11,7 +12,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    axios.get('https://photographer-online-backend.onrender.com/user/profile', {
+    axios.get(`${API_BASE_URL}/user/profile`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => {
@@ -21,13 +22,13 @@ const UserProfile = () => {
         setError('Failed to load profile');
       });
     // Fetch bookings for user
-    axios.get('https://photographer-online-backend.onrender.com/booking/mybookings', {
+    axios.get(`${API_BASE_URL}/booking/mybookings`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => {
         setBookings(res.data.bookings || []);
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   // Handle profile picture upload
@@ -43,7 +44,7 @@ const UserProfile = () => {
     formData.append('profilePicture', profilePicFile);
     try {
       // Replace with your actual endpoint for uploading profile picture
-      const res = await axios.post(`https://photographer-online-backend.onrender.com/user/uploadProfilePicture/${user._id}`, formData, {
+      const res = await axios.post(`${API_BASE_URL}/user/uploadProfilePicture/${user._id}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` }
       });
       setUser(prev => ({ ...prev, profilePicture: res.data.url }));
@@ -62,7 +63,7 @@ const UserProfile = () => {
       <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">User Profile</h2>
       <div className="flex flex-col md:flex-row items-center md:items-start gap-10 w-full">
         <div className="flex flex-col items-center w-full md:w-1/3">
-          <img src={user.profilePicture || '/default-profile.png'} alt="Profile" className="w-40 h-40 object-cover rounded-full border-4 border-yellow-400 mb-4 shadow-lg" />
+          <img src={user.profilePicture || defaultProfile} alt="Profile" className="w-40 h-40 object-cover rounded-full border-4 border-yellow-400 mb-4 shadow-lg" />
           <input type="file" accept="image/*" onChange={handleProfilePicChange} className="mb-2" />
           <button
             className="bg-yellow-500 text-white px-4 py-1 rounded font-semibold disabled:opacity-50 w-full"

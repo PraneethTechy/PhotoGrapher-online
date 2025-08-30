@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 
 const Register = () => {
   const [form, setForm] = useState({ name: '', email: '', password: '' });
@@ -20,7 +21,7 @@ const Register = () => {
     setError('');
     setSuccess('');
     try {
-      const res = await axios.post('https://photographer-online-backend.onrender.com/user/register', form);
+      const res = await axios.post(`${API_BASE_URL}/user/register`, form);
       if (res.data && res.data.success) {
         setSuccess('Registration successful! Redirecting to Sign In...');
         setForm({ name: '', email: '', password: '' });

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import API_BASE_URL from '../config/api';
+import defaultProfile from '../assets/defaultProfile.png';
 
 const Navbar = () => {
   const [photographerProfileId, setPhotographerProfileId] = useState('');
@@ -72,7 +73,7 @@ const Navbar = () => {
     if (!userName) return null;
     return (
       <img
-        src={profilePicture || '/default-profile.png'}
+        src={profilePicture || defaultProfile}
         alt="Profile"
         className="w-10 h-10 rounded-full object-cover border-2 border-white mr-2"
         style={{ background: '#eee' }}
@@ -89,72 +90,72 @@ const Navbar = () => {
 
       {/* Right: Nav Items or User Profile */}
       <div className="ml-auto flex items-center gap-6 text-lg font-medium relative">
-  <Link to="/" className="hover:text-orange-400 transition duration-300">Home</Link>
-  <Link to="/aboutus" className="hover:text-orange-400 transition duration-300">About Us</Link>
-  {userRole === 'photographer' && (
-        <Link to="/photographerdashboard" className="hover:text-orange-400 transition duration-300">Dashboard</Link>
-      )}
-  {userName && renderProfilePicture()}
-  {userName ? (
-    <>
-
-      <div className="flex items-center gap-2" ref={dropdownRef}>
-        <button
-          className="flex items-center gap-2 bg-gray-700 px-2 py-1 rounded-full font-semibold text-white hover:bg-red-500 transition focus:outline-none"
-          onClick={() => setDropdownOpen((open) => !open)}
-        >
-          <span>{userName}</span>
-          <span className="material-icons">      <ChevronDown className="w-7 h-7" />
-          </span>
-        </button>
-        {dropdownOpen && (
-          <div className="absolute right-0 top-14 bg-white text-gray-900 rounded-lg shadow-lg py-2 w-48 z-50">
-            {userRole === 'photographer' ? (
-              <Link to={photographerProfileId ? `/profile/${photographerProfileId}` : '#'} className="block px-4 py-2 hover:bg-gray-100">View Profile</Link>
-            ) : (
-              <Link to="/userprofile" className="block px-4 py-2 hover:bg-gray-100">View Profile</Link>
-            )}
-            <Link to="/editprofile" className="block px-4 py-2 hover:bg-gray-100">Edit Profile</Link>
-            {userRole === 'photographer' && (
-              <Link to="/editstudioprofile" className="block px-4 py-2 hover:bg-gray-100">Edit Studio Profile</Link>
-            )}
-            <button
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              onClick={() => {
-                localStorage.removeItem('token');
-                localStorage.removeItem('userName');
-                localStorage.removeItem('userRole');
-                localStorage.removeItem('profilePicture');
-                setUserName('');
-                setUserRole('');
-                setProfilePicture('');
-                setDropdownOpen(false);
-                window.dispatchEvent(new Event('userChanged'));
-                navigate('/signin', { replace: true });
-              }}
-            >
-              Logout
-            </button>
-          </div>
+        <Link to="/" className="hover:text-orange-400 transition duration-300">Home</Link>
+        <Link to="/aboutus" className="hover:text-orange-400 transition duration-300">About Us</Link>
+        {userRole === 'photographer' && (
+          <Link to="/photographerdashboard" className="hover:text-orange-400 transition duration-300">Dashboard</Link>
         )}
-      </div>
-    </>
-  ) : (
-    <>
-      <Link
-        to="/signin"
-        className="hover:text-orange-400 transition duration-300"
-      >
-        Sign In
-      </Link>
-      <Link
-        to="/registerstudio"
-        className="bg-red-500 text-white px-2 py-2 rounded-lg hover:bg-orange-600 transition duration-300 shadow-md"
-      >
-        Register as a Studio
-      </Link>
-    </>
-  )}
+        {userName && renderProfilePicture()}
+        {userName ? (
+          <>
+
+            <div className="flex items-center gap-2" ref={dropdownRef}>
+              <button
+                className="flex items-center gap-2 bg-gray-700 px-2 py-1 rounded-full font-semibold text-white hover:bg-red-500 transition focus:outline-none"
+                onClick={() => setDropdownOpen((open) => !open)}
+              >
+                <span>{userName}</span>
+                <span className="material-icons">      <ChevronDown className="w-7 h-7" />
+                </span>
+              </button>
+              {dropdownOpen && (
+                <div className="absolute right-0 top-14 bg-white text-gray-900 rounded-lg shadow-lg py-2 w-48 z-50">
+                  {userRole === 'photographer' ? (
+                    <Link to={photographerProfileId ? `/profile/${photographerProfileId}` : '#'} className="block px-4 py-2 hover:bg-gray-100">View Profile</Link>
+                  ) : (
+                    <Link to="/userprofile" className="block px-4 py-2 hover:bg-gray-100">View Profile</Link>
+                  )}
+                  <Link to="/editprofile" className="block px-4 py-2 hover:bg-gray-100">Edit Profile</Link>
+                  {userRole === 'photographer' && (
+                    <Link to="/editstudioprofile" className="block px-4 py-2 hover:bg-gray-100">Edit Studio Profile</Link>
+                  )}
+                  <button
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                    onClick={() => {
+                      localStorage.removeItem('token');
+                      localStorage.removeItem('userName');
+                      localStorage.removeItem('userRole');
+                      localStorage.removeItem('profilePicture');
+                      setUserName('');
+                      setUserRole('');
+                      setProfilePicture('');
+                      setDropdownOpen(false);
+                      window.dispatchEvent(new Event('userChanged'));
+                      navigate('/signin', { replace: true });
+                    }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          <>
+            <Link
+              to="/signin"
+              className="hover:text-orange-400 transition duration-300"
+            >
+              Sign In
+            </Link>
+            <Link
+              to="/registerstudio"
+              className="bg-red-500 text-white px-2 py-2 rounded-lg hover:bg-orange-600 transition duration-300 shadow-md"
+            >
+              Register as a Studio
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

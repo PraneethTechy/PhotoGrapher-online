@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import API_BASE_URL from '../config/api';
+import defaultProfile from '../assets/defaultProfile.png';
 
 const PhotographerProfile = () => {
   const { id } = useParams();
@@ -92,7 +93,7 @@ const PhotographerProfile = () => {
     <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-8 mt-8">
       <div className="flex flex-col md:flex-row items-center md:items-start gap-10">
         <div className="flex flex-col items-center w-full md:w-1/3">
-          <img src={photographer.user?.profilePicture || '/default-profile.png'} alt={photographer.user?.name} className="w-44 h-44 object-cover rounded-full border-4 border-yellow-400 mb-4 shadow-lg" />
+          <img src={photographer.user?.profilePicture || defaultProfile} alt={photographer.user?.name} className="w-44 h-44 object-cover rounded-full border-4 border-yellow-400 mb-4 shadow-lg" />
           {isOwnProfile && (
             <div className="mt-2 w-full flex flex-col items-center">
               <input type="file" accept="image/*" onChange={handleProfilePicChange} className="mb-2 w-full" />

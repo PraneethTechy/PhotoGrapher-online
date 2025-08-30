@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import defaultProfile from '../assets/defaultProfile.png';
 
 const ProfileDropdown = () => {
   const [userName, setUserName] = useState('');
@@ -40,7 +41,7 @@ const ProfileDropdown = () => {
         onClick={() => setDropdownOpen((open) => !open)}
       >
         <img
-          src={profilePicture || '/default-profile.png'}
+          src={profilePicture || defaultProfile}
           alt="Profile"
           className="w-8 h-8 rounded-full object-cover border-2 border-white"
           style={{ background: '#eee' }}
